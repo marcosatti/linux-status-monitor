@@ -1,0 +1,6 @@
+pyRAPL
+cobs
+pyserial
+protobuf
+psutil
+cputemp

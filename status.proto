@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message Status {
+	uint32 cpu = 1; // Percent
+	uint32 cpu_power = 2; // Watts
+	uint32 temperature = 3; // Celcius
+	uint32 network = 4; // MiB/s
+	uint32 samba_users_connected = 5; // Number
+	uint32 samba_files_opened = 6; // Number
+}

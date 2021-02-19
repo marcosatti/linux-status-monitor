@@ -1,0 +1,8 @@
+[Unit]
+Description=Linux Status Monitor
+
+[Service]
+ExecStart=python /root/linux-status-monitor/main.py /dev/ttyUSB0
+
+[Install]
+WantedBy=multi-user.target
