@@ -3,6 +3,8 @@ Description=Linux Status Monitor
 
 [Service]
 ExecStart=python /root/linux-status-monitor/main.py /dev/ttyUSB0
+Restart=on-failure
+RestartSec=5s
 
 [Install]
 WantedBy=multi-user.target
