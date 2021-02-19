@@ -41,4 +41,5 @@ def read_value():
     global wattage
 
     assert thread_handle is not None
+    assert thread_handle.is_alive()
     return wattage

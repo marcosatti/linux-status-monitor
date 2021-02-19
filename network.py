@@ -39,4 +39,5 @@ def read_value():
     global network_usage
 
     assert thread_handle is not None
+    assert thread_handle.is_alive()
     return network_usage

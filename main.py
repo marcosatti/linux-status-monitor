@@ -5,6 +5,7 @@ import network
 import argparse
 import sys
 import traceback 
+import signal
 
 parser = argparse.ArgumentParser(description='Status reporter driver')
 parser.add_argument('port', help='serial port that the reporter display device is connected to')
@@ -14,15 +15,33 @@ args = parser.parse_args()
 
 print('Start status monitor')
 
+exit_code = -1
+
+def handle_signal(code, _frame):
+    global exit_code
+
+    if code == signal.SIGINT:
+        exit_code = 0
+
+signal.signal(signal.SIGINT, handle_signal)
+
 power.start(args.period)
 network.start(args.period)
 
+def status_callback():
+    if exit_code >= 0:
+        return None
+    return status.get_status()
+
 try:
-    driver.run(args.port, args.period, status.get_status)
+    driver.run(args.port, args.period, status_callback)
 except:
     traceback.print_exc()
+    exit_code = 1
 
 network.exit()
 power.exit()
 
 print('Exit status monitor')
+
+sys.exit(exit_code)
