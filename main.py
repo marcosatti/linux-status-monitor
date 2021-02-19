@@ -17,13 +17,11 @@ print('Start status monitor')
 
 exit_code = -1
 
-def handle_signal(code, _frame):
+def sigint_handler(code, _frame):
     global exit_code
+    exit_code = 0
 
-    if code == signal.SIGINT:
-        exit_code = 0
-
-signal.signal(signal.SIGINT, handle_signal)
+signal.signal(signal.SIGINT, sigint_handler)
 
 power.start(args.period)
 network.start(args.period)
